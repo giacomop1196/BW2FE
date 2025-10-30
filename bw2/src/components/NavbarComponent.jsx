@@ -41,12 +41,7 @@ function NavbarComponent({ onLogout }) {
                         >
                             <NavDropdown.Item as={Link} to="/profilo">
                                 Visualizza profilo
-                            </NavDropdown.Item>
-                            
-                            <NavDropdown.Item as={Link} to="/profilo/modifica">
-                                Modifica profilo
-                            </NavDropdown.Item>
-                            
+                            </NavDropdown.Item>  
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={handleLogout}>
                                 Logout

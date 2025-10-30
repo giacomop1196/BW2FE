@@ -10,6 +10,8 @@ import RegisterComponent from './components/RegisterComponent';
 import ProfileComponent from './components/ProfileComponent';
 import AggiungiIndirizzoComponent from './components/AggiungiIndirizzoComponent';
 import IndirizziListComponent from './components/IndirizziListComponent';
+import ClienteAddComponent from './components/ClienteAddComponent';
+import ClientiListComponent from './components/ClientiListComponent';
 
 function App() {
   const [authToken, setAuthToken] = useState(
@@ -71,11 +73,24 @@ function App() {
 
         <Route path="/indirizzi/nuovo" element={
           <ProtectedRoute token={authToken}>
-             <AggiungiIndirizzoComponent/>
-            
+             <AggiungiIndirizzoComponent/>         
           </ProtectedRoute>
         } />
+
+        <Route path="/clienti" element={
+          <ProtectedRoute token={authToken}>
+             <ClientiListComponent/>
+          </ProtectedRoute>
+        } />
+      
+      <Route path="/clienti/nuovo" element={
+          <ProtectedRoute token={authToken}>
+             <ClienteAddComponent/>           
+          </ProtectedRoute>
+        } />
+
       </Routes>
+     
     </>
   )
 }
