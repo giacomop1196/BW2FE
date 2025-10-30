@@ -5,13 +5,12 @@ import { useNavigate } from 'react-router-dom';
 const API_BASE_URL = 'http://localhost:5000';
 
 function FattureListComponent() {
-    const [fattureData, setFattureData] = useState(null); 
+    const [fattureData, setFattureData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [page, setPage] = useState(0); 
     const navigate = useNavigate();
 
-    const fetchFatture = useCallback((pagina = 0) => {
+    const fetchFatture = useCallback(() => {
         const token = localStorage.getItem('authToken');
         if (!token) {
             setError('Accesso non autorizzato. Per favore, fai il login.');
@@ -20,40 +19,43 @@ function FattureListComponent() {
             return;
         }
 
-        // Aggiunge i parametri di paginazione all'URL
-        const API_URL = `${API_BASE_URL}/fatture?page=${pagina}&size=10&sort=data,desc`;
+        const API_URL = `${API_BASE_URL}/fatture`;
         setLoading(true);
         setError(null);
 
         fetch(API_URL, {
-            headers: { 'Authorization': `Bearer ${token}` }
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
         })
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                localStorage.removeItem('authToken');
-                throw new Error('Sessione scaduta. Effettua nuovamente il login.');
-            }
-            if (!response.ok) throw new Error('Impossibile caricare le fatture.');
-            return response.json();
-        })
-        .then(data => {
-            setFattureData(data); // Salva l'intera risposta 'Page'
-            setPage(data.number); // Aggiorna la pagina corrente
-        })
-        .catch(err => {
-            setError(err.message);
-            if (err.message.includes('Sessione scaduta')) {
-                setTimeout(() => navigate('/login'), 2000);
-            }
-        })
-        .finally(() => {
-            setLoading(false);
-        });
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    localStorage.removeItem('authToken');
+                    throw new Error('Sessione scaduta. Effettua nuovamente il login.');
+                }
+                if (!response.ok)
+                    throw new Error('Impossibile caricare le fatture.');
+                return response.json();
+            })
+            .then(data => {
+                setFattureData(data);
+            })
+            .catch(err => {
+                setError(err.message);
+                if (err.message.includes('Sessione scaduta')) {
+                    setTimeout(() => navigate('/login'), 2000);
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [navigate]);
 
     useEffect(() => {
-        fetchFatture(page);
-    }, [fetchFatture, page]); // Ricarica quando 'page' cambia
+        fetchFatture();
+    }, [fetchFatture]);
 
     const handleDelete = (id) => {
         const token = localStorage.getItem('authToken');
@@ -68,23 +70,25 @@ function FattureListComponent() {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         })
-        .then(response => {
-            if (response.status === 401 || response.status === 403) throw new Error('Sessione scaduta.');
-            if (response.status === 204) {
-                fetchFatture(page); // Ricarica la lista
-            } else {
-                throw new Error('Errore durante l\'eliminazione.');
-            }
-        })
-        .catch(err => setError(err.message));
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    localStorage.removeItem('authToken');
+                    throw new Error('Sessione scaduta.');
+                }
+                if (response.status === 204) {
+                    fetchFatture();
+                } else {
+                    throw new Error('Errore during l\'eliminazione.');
+                }
+            })
+            .catch(err => setError(err.message));
     };
 
-    // Formattatore per valuta
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(amount);
     };
 
-    if (loading && !fattureData) { // Mostra solo il loading iniziale
+    if (loading && !fattureData) {
         return (
             <Container className="text-center mt-5">
                 <Spinner animation="border" />
@@ -108,10 +112,10 @@ function FattureListComponent() {
             <Row className="justify-content-md-center">
                 <Col md={10}>
                     <Card className=' rounded-5'>
-                        <Card.Header as="h3">Tutte le Fatture</Card.Header>
+                        <Card.Header as="h3"><i className="bi bi-receipt me-2"></i>Tutte le Fatture</Card.Header>
                         <Card.Body>
                             {loading && <Spinner animation="border" size="sm" />}
-                            
+
                             {fatture && fatture.length > 0 ? (
                                 <ListGroup variant="flush">
                                     {fatture.map(fattura => (
@@ -121,15 +125,17 @@ function FattureListComponent() {
                                                 <br />
                                                 <small>
                                                     Nr: {fattura.numero} | Data: {fattura.data} | Importo: {formatCurrency(fattura.importo)}
-                                                    <br/>
-                                                    Stato: <span style={{ color: fattura.stato?.nome === 'PAGATA' ? 'green' : 'red' }}>
-                                                        {fattura.stato?.nome || 'N/D'}
-                                                    </span>
+                                                    <br />
+                                                    <div className='mt-2'>
+                                                        Stato: <span className='bg-primary p-1 rounded-5 fw-bold' style={{ color: fattura.stato?.statoFattura === 'PAGATA' ? 'green' : (fattura.stato?.statoFattura === 'IN_CORSO' ? 'yellow' : 'red') }}>
+                                                            {fattura.stato?.statoFattura || 'N/D'}
+                                                        </span>
+                                                    </div>
                                                 </small>
                                             </div>
                                             <div>
-                                                <Button variant="outline-danger" size="sm" onClick={() => handleDelete(fattura.id)}>
-                                                    Elimina
+                                                <Button className='rounded-5' variant="outline-danger" size="sm" onClick={() => handleDelete(fattura.id)}>
+                                                    <i className="bi bi-trash3"></i>  Elimina
                                                 </Button>
                                             </div>
                                         </ListGroup.Item>
@@ -137,21 +143,6 @@ function FattureListComponent() {
                                 </ListGroup>
                             ) : (
                                 <Alert variant="info">Nessuna fattura trovata.</Alert>
-                            )}
-
-                            {/* Paginazione */}
-                            {fattureData && fattureData.totalPages > 1 && (
-                                <Pagination className="mt-3 justify-content-center">
-                                    <Pagination.Prev 
-                                        onClick={() => setPage(page - 1)} 
-                                        disabled={fattureData.first} 
-                                    />
-                                    <Pagination.Item active>{page + 1} di {fattureData.totalPages}</Pagination.Item>
-                                    <Pagination.Next 
-                                        onClick={() => setPage(page + 1)} 
-                                        disabled={fattureData.last} 
-                                    />
-                                </Pagination>
                             )}
 
                         </Card.Body>

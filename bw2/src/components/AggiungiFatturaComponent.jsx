@@ -21,7 +21,7 @@ function AggiungiFatturaComponent() {
     const navigate = useNavigate();
 
     // Carica gli stati fattura per il menu <select>
-    const fetchStatiFattura = useCallback(() => {
+   const fetchStatiFattura = useCallback(() => {
         const token = localStorage.getItem('authToken');
         if (!token) {
             setError('Accesso non autorizzato.');
@@ -29,14 +29,36 @@ function AggiungiFatturaComponent() {
             return;
         }
 
-        const API_URL_STATI = `${API_BASE_URL}/api/statifattura`;
+        const API_URL_STATI = `${API_BASE_URL}/api/stati-fattura`;
 
         fetch(API_URL_STATI, { headers: { 'Authorization': `Bearer ${token}` } })
-            .then(res => res.json())
-            .then(data => {
-                setStatiFattura(data.content || data);
+            .then(res => {
+                
+                if (!res.ok) {
+                  
+                    return res.json().then(errData => {
+                        throw new Error(errData.message || `Errore HTTP: ${res.status}`);
+                    });
+                }
+              
+                return res.json();
             })
-            .catch(err => setError('Impossibile caricare gli stati fattura.', err))
+            .then(data => {
+              
+                const stati = data.content || data;
+                if (Array.isArray(stati)) {
+                    setStatiFattura(stati);
+                } else {
+                   
+                    console.error("Dati stati fattura non validi:", data);
+                    throw new Error('Formato dati per stati fattura non valido.');
+                }
+            })
+            .catch(err => {
+               
+                setError(`Impossibile caricare gli stati fattura: ${err.message}`);
+                setStatiFattura([]); 
+            })
             .finally(() => setLoadingStati(false));
     }, []);
 
@@ -69,18 +91,18 @@ function AggiungiFatturaComponent() {
         setError(null);
         setSuccess(null);
 
-        // Prepariamo il payload come richiesto dal @RequestBody Fattura
+  
         const payload = {
             numero: formData.numero,
             data: formData.data,
             importo: parseFloat(formData.importo),
-            // L'entità Fattura si aspetta un oggetto StatoFattura
+         
             stato: {
                 id: formData.statoId
             }
         };
 
-        // L'endpoint di creazione usa l'ID cliente dall'URL
+    
         const API_URL_CREATE = `${API_BASE_URL}/fatture/cliente/${clienteId}`;
 
         fetch(API_URL_CREATE, {
@@ -147,10 +169,10 @@ function AggiungiFatturaComponent() {
                                     <Form.Label>Stato Fattura</Form.Label>
                                     {loadingStati ? <Spinner size="sm" /> : (
                                         <Form.Select className='rounded-5' name="statoId" value={formData.statoId} onChange={handleChange} required>
-                                            <option value="">Seleziona uno stato...</option>
+                                            <option value="" className='text-black'>Seleziona uno stato...</option>
                                             {statiFattura.map(stato => (
                                                 <option key={stato.id} value={stato.id}>
-                                                    {stato.code}
+                                                    {stato.statoFattura}
                                                 </option>
                                             ))}
                                         </Form.Select>

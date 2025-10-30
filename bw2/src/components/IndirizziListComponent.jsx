@@ -116,7 +116,7 @@ function IndirizziListComponent() {
             <Row className="justify-content-md-center">
                 <Col md={10}>
                     <Card className='rounded-5'>
-                        <Card.Header as="h3"><i class="bi bi-map-fill me-2"></i>Gestisci Indirizzi</Card.Header>
+                        <Card.Header as="h3"><i className="bi bi-map-fill me-2"></i>Gestisci Indirizzi</Card.Header>
                         <Card.Body>
                             <Button 
                                 variant="primary" 
