@@ -85,9 +85,9 @@ function RegisterComponent() {
 
     return (
         <Container>
-            <Row className="justify-content-md-center mt-5">
+            <Row className="justify-content-md-center">
                 <Col xs={12} md={6}>
-                    <h2 className="text-center mb-4">Registrati</h2>
+                    <h2 className="text-center mb-4 mt-5">Registrati</h2>
                     <Form onSubmit={handleSubmit}>
                         {error && <Alert variant="danger">{error}</Alert>}
                         {success && <Alert variant="success">{success}</Alert>}
@@ -101,6 +101,7 @@ function RegisterComponent() {
                                 onChange={(e) => setNome(e.target.value)}
                                 required
                                 disabled={isLoading}
+                                className='rounded-5'
                             />
                         </Form.Group>
 
@@ -113,6 +114,7 @@ function RegisterComponent() {
                                 onChange={(e) => setCognome(e.target.value)}
                                 required
                                 disabled={isLoading}
+                                className='rounded-5'
                             />
                         </Form.Group>
 
@@ -125,6 +127,7 @@ function RegisterComponent() {
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
                                 disabled={isLoading}
+                                className='rounded-5'
                             />
                         </Form.Group>
 
@@ -137,6 +140,7 @@ function RegisterComponent() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 required
                                 disabled={isLoading}
+                                className='rounded-5'
                             />
                         </Form.Group>
 
@@ -149,6 +153,7 @@ function RegisterComponent() {
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
                                 disabled={isLoading}
+                                className='rounded-5'
                             />
                         </Form.Group>
 
@@ -156,7 +161,7 @@ function RegisterComponent() {
                             variant="primary"
                             type="submit"
                             disabled={isLoading}
-                            className="w-100"
+                            className="w-100 rounded-5"
                         >
                             {isLoading ? (
                                 <>

@@ -110,22 +110,23 @@ function AggiungiIndirizzoComponent() {
                                 
                                 <Form.Group className="mb-3" controlId="formVia">
                                     <Form.Label>Via</Form.Label>
-                                    <Form.Control type="text" name="via" value={formData.via} onChange={handleChange} required />
+                                    <Form.Control className='rounded-5' type="text" name="via" value={formData.via} onChange={handleChange} required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formCivico">
                                     <Form.Label>Numero Civico</Form.Label>
-                                    <Form.Control type="text" name="civico" value={formData.civico} onChange={handleChange} required />
+                                    <Form.Control className='rounded-5' type="text" name="civico" value={formData.civico} onChange={handleChange} required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formLocalita">
                                     <Form.Label>Località (opzionale)</Form.Label>
-                                    <Form.Control type="text" name="localita" value={formData.localita} onChange={handleChange} />
+                                    <Form.Control className='rounded-5' type="text" name="localita" value={formData.localita} onChange={handleChange} />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formCap">
                                     <Form.Label>CAP</Form.Label>
                                     <Form.Control
+                                        className='rounded-5'
                                         type="number" 
                                         name="cap"
                                         value={formData.cap}
@@ -137,6 +138,7 @@ function AggiungiIndirizzoComponent() {
                                 <Form.Group className="mb-3" controlId="formComune">
                                     <Form.Label>Comune</Form.Label>
                                     <Form.Control
+                                        className='rounded-5'
                                         type="text"
                                         name="comune"
                                         value={formData.comune}

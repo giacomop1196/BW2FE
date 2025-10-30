@@ -170,13 +170,13 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="ragioneSociale">
                                             <Form.Label>Ragione Sociale <span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="text" name="ragioneSociale" value={formData.ragioneSociale} onChange={handleChange} required />
+                                            <Form.Control className='rounded-5' type="text" name="ragioneSociale" value={formData.ragioneSociale} onChange={handleChange} required />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="partitaIva">
                                             <Form.Label>Partita IVA <span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="text" name="partitaIva" value={formData.partitaIva} onChange={handleChange} required />
+                                            <Form.Control className='rounded-5' type="text" name="partitaIva" value={formData.partitaIva} onChange={handleChange} required />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -184,13 +184,13 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="email">
                                             <Form.Label>Email <span className="text-danger">*</span></Form.Label>
-                                            <Form.Control type="email" name="email" value={formData.email} onChange={handleChange} required />
+                                            <Form.Control className='rounded-5' type="email" name="email" value={formData.email} onChange={handleChange} required />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="pec">
                                             <Form.Label>PEC</Form.Label>
-                                            <Form.Control type="email" name="pec" value={formData.pec} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="email" name="pec" value={formData.pec} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -198,13 +198,13 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="telefono">
                                             <Form.Label>Telefono</Form.Label>
-                                            <Form.Control type="tel" name="telefono" value={formData.telefono} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="tel" name="telefono" value={formData.telefono} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="fatturatoAnnuale">
                                             <Form.Label>Fatturato Annuale</Form.Label>
-                                            <Form.Control type="number" step="0.01" name="fatturatoAnnuale" value={formData.fatturatoAnnuale} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="number" step="0.01" name="fatturatoAnnuale" value={formData.fatturatoAnnuale} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -212,7 +212,7 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="tipoCliente">
                                             <Form.Label>Tipo Cliente <span className="text-danger">*</span></Form.Label>
-                                            <Form.Select name="tipoCliente" value={formData.tipoCliente} onChange={handleChange} required>
+                                            <Form.Select className='rounded-5' name="tipoCliente" value={formData.tipoCliente} onChange={handleChange} required>
                                                 <option value="">Seleziona un tipo...</option>
                                                 <option value="PA">PA</option>
                                                 <option value="SAS">SAS</option>
@@ -224,7 +224,7 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="logoAziendale">
                                             <Form.Label>Logo Aziendale (URL)</Form.Label>
-                                            <Form.Control type="text" name="logoAziendale" value={formData.logoAziendale} onChange={handleChange} placeholder="http://..." />
+                                            <Form.Control className='rounded-5' type="text" name="logoAziendale" value={formData.logoAziendale} onChange={handleChange} placeholder="http://..." />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -236,13 +236,13 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="nomeContatto">
                                             <Form.Label>Nome Contatto</Form.Label>
-                                            <Form.Control type="text" name="nomeContatto" value={formData.nomeContatto} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="text" name="nomeContatto" value={formData.nomeContatto} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="cognomeContatto">
                                             <Form.Label>Cognome Contatto</Form.Label>
-                                            <Form.Control type="text" name="cognomeContatto" value={formData.cognomeContatto} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="text" name="cognomeContatto" value={formData.cognomeContatto} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -250,13 +250,13 @@ function ClienteAddComponent() {
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="emailContatto">
                                             <Form.Label>Email Contatto</Form.Label>
-                                            <Form.Control type="email" name="emailContatto" value={formData.emailContatto} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="email" name="emailContatto" value={formData.emailContatto} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                     <Col md={6}>
                                         <Form.Group className="mb-3" controlId="telefonoContatto">
                                             <Form.Label>Telefono Contatto</Form.Label>
-                                            <Form.Control type="tel" name="telefonoContatto" value={formData.telefonoContatto} onChange={handleChange} />
+                                            <Form.Control className='rounded-5' type="tel" name="telefonoContatto" value={formData.telefonoContatto} onChange={handleChange} />
                                         </Form.Group>
                                     </Col>
                                 </Row>
@@ -273,7 +273,7 @@ function ClienteAddComponent() {
                                     <>
                                         <Form.Group className="mb-3" controlId="indirizzoSedeLegaleId">
                                             <Form.Label>Sede Legale <span className="text-danger">*</span></Form.Label>
-                                            <Form.Select name="indirizzoSedeLegaleId" value={formData.indirizzoSedeLegaleId} onChange={handleChange} required>
+                                            <Form.Select className='rounded-5' name="indirizzoSedeLegaleId" value={formData.indirizzoSedeLegaleId} onChange={handleChange} required>
                                                 <option value="">Seleziona un indirizzo...</option>
                                                 {indirizzi.map(ind => (
                                                     <option key={ind.id} value={ind.id}>
@@ -285,7 +285,7 @@ function ClienteAddComponent() {
 
                                         <Form.Group className="mb-3" controlId="indirizzoSedeOperativaId">
                                             <Form.Label>Sede Operativa (se diversa)</Form.Label>
-                                            <Form.Select name="indirizzoSedeOperativaId" value={formData.indirizzoSedeOperativaId} onChange={handleChange}>
+                                            <Form.Select className='rounded-5' name="indirizzoSedeOperativaId" value={formData.indirizzoSedeOperativaId} onChange={handleChange}>
                                                 <option value="">Seleziona un indirizzo (o lascia vuoto)...</option>
                                                 {indirizzi.map(ind => (
                                                     <option key={ind.id} value={ind.id}>

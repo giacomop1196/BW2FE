@@ -67,15 +67,16 @@ function LoginComponent({ onLoginSuccess }) {
 
     return (
         <Container>
-            <Row className="justify-content-md-center mt-5">
+            <Row className="justify-content-md-center">
                 <Col xs={12} md={6}>
-                    <h2 className="text-center mb-4">Login</h2>
+                    <h2 className="text-center mb-4 mt-5">Login</h2>
                     <Form onSubmit={handleSubmit}>
                         {error && <Alert variant="danger">{error}</Alert>}
 
                         <Form.Group className="mb-3" controlId="formLoginEmail">
                             <Form.Label>Email</Form.Label>
                             <Form.Control
+                                className='rounded-5'
                                 type="email"
                                 placeholder="Inserisci email"
                                 value={email}
@@ -88,6 +89,7 @@ function LoginComponent({ onLoginSuccess }) {
                         <Form.Group className="mb-3" controlId="formLoginPassword">
                             <Form.Label>Password</Form.Label>
                             <Form.Control
+                                className='rounded-5'
                                 type="password"
                                 placeholder="Password"
                                 value={password}
@@ -101,8 +103,7 @@ function LoginComponent({ onLoginSuccess }) {
                             variant="primary"
                             type="submit"
                             disabled={isLoading}
-                            className="w-100"
-                        >
+                            className="w-100 rounded-5">
                             {isLoading ? (
                                 <>
                                     <Spinner
