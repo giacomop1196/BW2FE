@@ -108,9 +108,8 @@ function ClienteAddComponent() {
             nomeContatto: formData.nomeContatto || null,
             cognomeContatto: formData.cognomeContatto || null,
             telefonoContatto: formData.telefonoContatto || null,
-
-            indirizzoSedeLegale: formData.indirizzoSedeLegaleId ? { id: formData.indirizzoSedeLegaleId } : null,
-            indirizzoSedeOperativa: formData.indirizzoSedeOperativaId ? { id: formData.indirizzoSedeOperativaId } : null
+            indirizzoSedeLegaleId: formData.indirizzoSedeLegaleId || null,
+            indirizzoSedeOperativaId: formData.indirizzoSedeOperativaId || null
             
         };
 

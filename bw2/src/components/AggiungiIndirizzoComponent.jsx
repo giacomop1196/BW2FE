@@ -1,5 +1,3 @@
-// src/components/AggiungiIndirizzoComponent.js
-
 import { useState } from 'react';
 import { Container, Row, Col, Card, Alert, Spinner, Button, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
