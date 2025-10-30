@@ -1,0 +1,7 @@
+.sfondo-viola-diagonale {
+  background: #c42b96;
+  background: linear-gradient(227deg,rgba(196, 43, 150, 0.98) 0%, rgba(198, 233, 245, 1) 94%);
+  min-height: 100vh; 
+  background-attachment: fixed;
+  background-size: cover;
+}

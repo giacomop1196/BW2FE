@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import { Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 import LoginComponent from './components/LoginComponent';
 import ProtectedRoute from './components/ProtectedRoute';
 import HomeComponent from './components/HomeComponent';
@@ -12,6 +13,8 @@ import AggiungiIndirizzoComponent from './components/AggiungiIndirizzoComponent'
 import IndirizziListComponent from './components/IndirizziListComponent';
 import ClienteAddComponent from './components/ClienteAddComponent';
 import ClientiListComponent from './components/ClientiListComponent';
+import AggiungiFatturaComponent from './components/AggiungiFatturaComponent';
+import FattureListComponent from './components/FattureListComponent';
 
 function App() {
   const [authToken, setAuthToken] = useState(
@@ -86,6 +89,18 @@ function App() {
       <Route path="/clienti/nuovo" element={
           <ProtectedRoute token={authToken}>
              <ClienteAddComponent/>           
+          </ProtectedRoute>
+        } />
+
+        <Route path="/fatture" element={
+          <ProtectedRoute token={authToken}>
+             <FattureListComponent/>           
+          </ProtectedRoute>
+        } />
+
+        <Route path="/clienti/:clienteId/fatture/nuova" element={
+          <ProtectedRoute token={authToken}>
+             <AggiungiFatturaComponent/>           
           </ProtectedRoute>
         } />
 

@@ -100,8 +100,8 @@ function AggiungiIndirizzoComponent() {
         <Container className="mt-5">
             <Row className="justify-content-md-center">
                 <Col md={8}>
-                    <Card>
-                        <Card.Header as="h3">Aggiungi Nuovo Indirizzo</Card.Header>
+                    <Card className='rounded-5'>
+                        <Card.Header as="h3"><i className="bi bi-plus-circle"></i> Aggiungi Nuovo Indirizzo</Card.Header>
                         <Card.Body>
                             <Form onSubmit={handleSubmit}>
                                 {/* Messaggi di stato */}
@@ -147,11 +147,11 @@ function AggiungiIndirizzoComponent() {
 
                                 <hr />
 
-                                <Button variant="secondary" onClick={() => navigate('/indirizzi')} className="me-2" disabled={loading}>
+                                <Button variant="secondary" onClick={() => navigate('/indirizzi')} className="me-2 rounded-5" disabled={loading}>
                                     Annulla
                                 </Button>
-                                <Button variant="primary" type="submit" disabled={loading}>
-                                    {loading ? 'Salvataggio...' : 'Salva Indirizzo'}
+                                <Button className='rounded-5' variant="primary" type="submit" disabled={loading}>
+                                 <i className="bi bi-floppy"></i>   {loading ? 'Salvataggio...' : 'Salva Indirizzo'}
                                 </Button>
                             </Form>
                         </Card.Body>

@@ -115,15 +115,15 @@ function IndirizziListComponent() {
         <Container className="mt-5">
             <Row className="justify-content-md-center">
                 <Col md={10}>
-                    <Card>
-                        <Card.Header as="h3">I tuoi Indirizzi</Card.Header>
+                    <Card className='rounded-5'>
+                        <Card.Header as="h3"><i class="bi bi-map-fill me-2"></i>Gestisci Indirizzi</Card.Header>
                         <Card.Body>
                             <Button 
                                 variant="primary" 
-                                className="mb-3"
+                                className="mb-3 rounded-5"
                                 onClick={() => navigate('/indirizzi/nuovo')}
                             >
-                                Aggiungi nuovo indirizzo
+                                <i className="bi bi-plus-circle"></i> Aggiungi nuovo indirizzo
                             </Button>
                             
                             {indirizziData && indirizziData.content && indirizziData.content.length > 0 ? (
@@ -134,13 +134,12 @@ function IndirizziListComponent() {
                                                 <strong>{indirizzo.via}, {indirizzo.civico}</strong><br />
                                                 <small>
                                                     {indirizzo.cap} {indirizzo.localita ? indirizzo.localita : ''} 
-                                                    {/* MODIFICA: Legge 'comune' come stringa diretta */}
                                                     ({indirizzo.comune})
                                                 </small>
                                             </div>
                                             <div>
-                                                <Button variant="outline-danger" size="sm" onClick={() => handleDelete(indirizzo.id)}>
-                                                    Elimina
+                                                <Button variant="outline-danger" className='rounded-4' size="sm" onClick={() => handleDelete(indirizzo.id)}>
+                                                  <i className="bi bi-trash3"></i>  Elimina
                                                 </Button>
                                             </div>
                                         </ListGroup.Item>

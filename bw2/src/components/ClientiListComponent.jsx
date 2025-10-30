@@ -2,10 +2,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { Container, Row, Col, Card, Alert, Spinner, Button, ListGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = 'http://localhost:5000'; 
+const API_BASE_URL = 'http://localhost:5000';
 
 function ClientiListComponent() {
-    const [clientiData, setClientiData] = useState(null); 
+    const [clientiData, setClientiData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ function ClientiListComponent() {
             return;
         }
 
-        const API_URL = `${API_BASE_URL}/clienti`; 
+        const API_URL = `${API_BASE_URL}/clienti`;
         setLoading(true);
         setError(null);
 
@@ -31,28 +31,28 @@ function ClientiListComponent() {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                localStorage.removeItem('authToken');
-                throw new Error('Sessione scaduta. Effettua nuovamente il login.');
-            }
-            if (!response.ok) {
-                throw new Error('Impossibile caricare i clienti.');
-            }
-            return response.json();
-        })
-        .then(data => {
-            setClientiData(data); 
-        })
-        .catch(err => {
-            setError(err.message);
-            if (err.message.includes('Sessione scaduta')) {
-                setTimeout(() => navigate('/login'), 2000);
-            }
-        })
-        .finally(() => {
-            setLoading(false);
-        });
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    localStorage.removeItem('authToken');
+                    throw new Error('Sessione scaduta. Effettua nuovamente il login.');
+                }
+                if (!response.ok) {
+                    throw new Error('Impossibile caricare i clienti.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                setClientiData(data);
+            })
+            .catch(err => {
+                setError(err.message);
+                if (err.message.includes('Sessione scaduta')) {
+                    setTimeout(() => navigate('/login'), 2000);
+                }
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     }, [navigate]);
 
     useEffect(() => {
@@ -72,25 +72,25 @@ function ClientiListComponent() {
         }
 
         const API_URL_DELETE = `${API_BASE_URL}/clienti/${id}`;
-        
+
         fetch(API_URL_DELETE, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
         })
-        .then(response => {
-            if (response.status === 401 || response.status === 403) {
-                localStorage.removeItem('authToken');
-                throw new Error('Sessione scaduta.');
-            }
-            if (response.status === 204) {
-                fetchClienti(); 
-            } else {
-                 throw new Error('Errore during l\'eliminazione.');
-            }
-        })
-        .catch(err => {
-            setError(err.message);
-        });
+            .then(response => {
+                if (response.status === 401 || response.status === 403) {
+                    localStorage.removeItem('authToken');
+                    throw new Error('Sessione scaduta.');
+                }
+                if (response.status === 204) {
+                    fetchClienti();
+                } else {
+                    throw new Error('Errore during l\'eliminazione.');
+                }
+            })
+            .catch(err => {
+                setError(err.message);
+            });
     };
 
 
@@ -114,49 +114,59 @@ function ClientiListComponent() {
     const clienti = clientiData ? clientiData.content : [];
 
     return (
-        <Container className="mt-5">
-            <Row className="justify-content-md-center">
-                <Col md={10}>
-                    <Card>
-                        <Card.Header as="h3">I tuoi Clienti</Card.Header>
-                        <Card.Body>
-                            <Button 
-                                variant="primary" 
-                                className="mb-3"
-                                onClick={() => navigate('/clienti/nuovo')}
-                            >
-                                Aggiungi nuovo cliente
-                            </Button>
-                            
-                            {clienti && clienti.length > 0 ? (
-                                <ListGroup variant="flush">
-                                    {clienti.map(cliente => (
-                                        <ListGroup.Item key={cliente.id} className="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <strong>{cliente.ragioneSociale}</strong> 
-                                                <small className="text-muted ms-2">({cliente.tipoCliente || 'N/D'})</small>
-                                                <br />
-                                                <small>
-                                                    P.IVA: {cliente.partitaIva || 'N/D'} | 
-                                                    Email: {cliente.email || 'N/D'}
-                                                </small>
-                                            </div>
-                                            <div>
-                                                <Button variant="outline-danger" size="sm" onClick={() => handleDelete(cliente.id)}>
-                                                    Elimina
-                                                </Button>
-                                            </div>
-                                        </ListGroup.Item>
-                                    ))}
-                                </ListGroup>
-                            ) : (
-                                <Alert variant="info">Non hai ancora aggiunto nessun cliente.</Alert>
-                            )}
-                        </Card.Body>
-                    </Card>
-                </Col>
-            </Row>
-        </Container>
+       
+            <Container className="mt-5">
+                <Row className="justify-content-md-center">
+                    <Col md={10}>
+                        <Card className='rounded-5'>
+                            <Card.Header as="h3"><i className="bi bi-people-fill me-2"></i>Lista Clienti</Card.Header>
+                            <Card.Body>
+                                <Button
+                                    variant="primary"
+                                    className="mb-3 rounded-5"
+                                    onClick={() => navigate('/clienti/nuovo')}
+                                >
+                                    <i className="bi bi-plus-circle"></i> Aggiungi nuovo cliente
+                                </Button>
+
+                                {clienti && clienti.length > 0 ? (
+                                    <ListGroup variant="flush">
+                                        {clienti.map(cliente => (
+                                            <ListGroup.Item key={cliente.id} className="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <strong>{cliente.ragioneSociale}</strong>
+                                                    <small className="text-muted ms-2">({cliente.tipoCliente || 'N/D'})</small>
+                                                    <br />
+                                                    <small>
+                                                        P.IVA: {cliente.partitaIva || 'N/D'} |
+                                                        Email: {cliente.email || 'N/D'}
+                                                    </small>
+                                                </div>
+                                                <div>
+                                                    <Button
+                                                        variant="outline-primary"
+                                                        size="sm"
+                                                        className="me-2 rounded-5"
+                                                        onClick={() => navigate(`/clienti/${cliente.id}/fatture/nuova`)}
+                                                    >
+                                                        <i className="bi bi-plus-circle"></i>  Aggiungi Fattura
+                                                    </Button>
+                                                    <Button variant="outline-danger" className='rounded-4' size="sm" onClick={() => handleDelete(cliente.id)}>
+                                                        <i className="bi bi-trash3"></i>  Elimina
+                                                    </Button>
+                                                </div>
+                                            </ListGroup.Item>
+                                        ))}
+                                    </ListGroup>
+                                ) : (
+                                    <Alert variant="info">Non hai ancora aggiunto nessun cliente.</Alert>
+                                )}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+      
     );
 }
 

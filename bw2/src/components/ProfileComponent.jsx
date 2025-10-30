@@ -92,8 +92,8 @@ function ProfileComponent() {
             <Container className="mt-5">
                 <Row className="justify-content-md-center">
                     <Col md={8}>
-                        <Card>
-                            <Card.Header as="h3">Il tuo Profilo</Card.Header>
+                        <Card className='rounded-5'>
+                            <Card.Header as="h3"><i className="bi bi-person-circle me-2"></i>Il tuo Profilo</Card.Header>
                             <Card.Body>
                                 <Card.Title>{user.nome} {user.cognome}</Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">@{user.username}</Card.Subtitle>
@@ -101,7 +101,7 @@ function ProfileComponent() {
                                 <Card.Text>
                                     <strong>Email:</strong> {user.email}
                                 </Card.Text>
-                                <Button variant="primary">Modifica Profilo</Button>
+                               
                             </Card.Body>
                         </Card>
                     </Col>

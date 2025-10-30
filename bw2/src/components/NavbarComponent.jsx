@@ -15,7 +15,7 @@ function NavbarComponent({ onLogout }) {
         <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
             <Container>
                 <Navbar.Brand as={Link} to="/">
-                    Gestione Clienti
+                    Gestione Clienti Epicode
                 </Navbar.Brand>
                 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -40,11 +40,11 @@ function NavbarComponent({ onLogout }) {
                             align="end" 
                         >
                             <NavDropdown.Item as={Link} to="/profilo">
-                                Visualizza profilo
+                               <i className="bi bi-person-circle"></i> Visualizza profilo
                             </NavDropdown.Item>  
                             <NavDropdown.Divider />
                             <NavDropdown.Item onClick={handleLogout}>
-                                Logout
+                              <i className="bi bi-box-arrow-in-left"></i>  Logout
                             </NavDropdown.Item>
                         </NavDropdown>
                     </Nav>

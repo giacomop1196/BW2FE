@@ -156,8 +156,8 @@ function ClienteAddComponent() {
         <Container className="mt-5">
             <Row className="justify-content-md-center">
                 <Col md={9}>
-                    <Card>
-                        <Card.Header as="h3">Aggiungi Nuovo Cliente</Card.Header>
+                    <Card className='rounded-5'>
+                        <Card.Header as="h3"><i className="bi bi-plus-circle"></i> Aggiungi Nuovo Cliente</Card.Header>
                         <Card.Body>
                             {error && <Alert variant="danger">{error}</Alert>}
                             {success && <Alert variant="success">{success}</Alert>}
@@ -298,11 +298,11 @@ function ClienteAddComponent() {
                                 )}
 
                                 <div className="mt-4 d-flex justify-content-between">
-                                    <Button variant="secondary" onClick={() => navigate('/clienti')}>
+                                    <Button className='rounded-5' variant="secondary" onClick={() => navigate('/clienti')}>
                                         Annulla
                                     </Button>
-                                    <Button variant="primary" type="submit" disabled={loading || loadingIndirizzi}>
-                                        {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Salva Cliente'}
+                                    <Button className='rounded-5' variant="primary" type="submit" disabled={loading || loadingIndirizzi}>
+                                       <i className="bi bi-floppy"></i> {loading ? <Spinner as="span" animation="border" size="sm" /> : 'Salva Cliente'}
                                     </Button>
                                 </div>
                             </Form>
