@@ -121,7 +121,7 @@ function AggiungiFatturaComponent() {
         <Container className="mt-5">
             <Row className="justify-content-md-center">
                 <Col md={8}>
-                    <Card>
+                    <Card className='rounded-5'>
                         <Card.Header as="h3"><i className="bi bi-plus-circle"></i> Aggiungi Fattura per Cliente</Card.Header>
                         <Card.Body>
                             <Form onSubmit={handleSubmit}>
@@ -130,23 +130,23 @@ function AggiungiFatturaComponent() {
 
                                 <Form.Group className="mb-3" controlId="formNumero">
                                     <Form.Label>Numero Fattura</Form.Label>
-                                    <Form.Control type="text" name="numero" value={formData.numero} onChange={handleChange} required />
+                                    <Form.Control className='rounded-5' type="text" name="numero" value={formData.numero} onChange={handleChange} required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formData">
                                     <Form.Label>Data Fattura</Form.Label>
-                                    <Form.Control type="date" name="data" value={formData.data} onChange={handleChange} required />
+                                    <Form.Control className='rounded-5' type="date" name="data" value={formData.data} onChange={handleChange} required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formImporto">
                                     <Form.Label>Importo (€)</Form.Label>
-                                    <Form.Control type="number" step="0.01" name="importo" value={formData.importo} onChange={handleChange} required />
+                                    <Form.Control className='rounded-5' type="number" step="0.01" name="importo" value={formData.importo} onChange={handleChange} required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" controlId="formStato">
                                     <Form.Label>Stato Fattura</Form.Label>
                                     {loadingStati ? <Spinner size="sm" /> : (
-                                        <Form.Select name="statoId" value={formData.statoId} onChange={handleChange} required>
+                                        <Form.Select className='rounded-5' name="statoId" value={formData.statoId} onChange={handleChange} required>
                                             <option value="">Seleziona uno stato...</option>
                                             {statiFattura.map(stato => (
                                                 <option key={stato.id} value={stato.id}>
@@ -158,10 +158,10 @@ function AggiungiFatturaComponent() {
                                 </Form.Group>
 
                                 <hr />
-                                <Button variant="secondary" onClick={() => navigate('/clienti')} className="me-2" disabled={loading}>
+                                <Button variant="secondary" onClick={() => navigate('/clienti')} className="me-2 rounded-5" disabled={loading}>
                                     Annulla
                                 </Button>
-                                <Button variant="primary" type="submit" disabled={loading || loadingStati}>
+                                <Button variant="primary" className='rounded-5' type="submit" disabled={loading || loadingStati}>
                                   <i className="bi bi-floppy"></i>  {loading ? 'Salvataggio...' : 'Salva Fattura'}
                                 </Button>
                             </Form>
